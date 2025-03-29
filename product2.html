@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Pixel 8 pro</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to CSS -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header .logo {
+            list-style: none;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        nav ul li {
+            margin-left: 20px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        s{
+            color: #a8a4a4;
+        }
+        .product-container {
+            display: flex;
+            padding: 20px;
+            background-color: white;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .product-image {
+            flex: 1;
+            max-width: 50%;
+            padding: 20px;
+            position: relative;
+        }
+        .product-image img {
+            width: 100%;
+            height: 700px;
+            border-radius: 8px;
+            display: none;
+        }
+        .product-image img.active {
+            display: block;
+        }
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 24px;
+        }
+        .carousel-arrow.left {
+            left: 10px;
+        }
+        .carousel-arrow.right {
+            right: 10px;
+        }
+        .product-details {
+            flex: 1;
+            padding: 20px;
+        }
+        .product-details h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .product-details .price {
+            font-size: 28px;
+            color: #e67e22;
+            margin-bottom: 20px;
+        }
+        .product-details .description {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .product-details .dropdown {
+            margin-bottom: 20px;
+        }
+        .product-details .dropdown label {
+            font-size: 16px;
+            margin-bottom: 5px;
+            display: block;
+        }
+        .product-details .dropdown select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .product-details .total-price {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #e67e22;
+        }
+        .product-details .buy-now {
+            background-color: #333;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .product-details .buy-now:hover {
+            background-color: #555;
+        }
+        .package-options {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .package-options .package {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            flex: 1;
+            margin: 0 10px;
+            background-color: #fff;
+        }
+        .package-options .package:hover {
+            background-color: #f9f9f9;
+        }
+        .package-options .package.selected {
+            border: 2px solid #e67e22;
+            background-color: #fff3e6;
+        }
+        .package-options .package h3 {
+            margin: 0 0 10px;
+            font-size: 20px;
+            color: #333;
+        }
+        .package-options .package p {
+            margin: 5px 0;
+            font-size: 16px;
+            color: #666;
+        }
+        .package-options .package .see-more {
+            background-color: #333;
+            color: white;
+            padding: 10px 15px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .package-options .package .see-more:hover {
+            background-color: #555;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .modal-content h2 {
+            margin-top: 0;
+        }
+        .modal-content .item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .modal-content .item img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+        .modal-content .item p {
+            margin: 0;
+            font-size: 16px;
+        }
+        .modal-content .close {
+            background-color: #333;
+            color: white;
+            padding: 10px 15px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .modal-content .close:hover {
+            background-color: #555;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+
+        /*Zoom */
+        .modal-content img {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+
+        .modal-content img:hover {
+            transform: scale(1.1);
+        }
+
+        .zoom-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .zoom-overlay img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 8px;
+        }
+
+        .close-zoom {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .price-container {
+    margin-bottom: 20px;
+}
+
+.price-container .price,
+.price-container .package-price {
+    font-size: 28px;
+    color: #b66f30;
+    margin-bottom: 10px;
+}
+
+.price-container .package-price {
+    color: #333; /* Different color for package price */
+}
+
+#compare{
+    text-align: center;
+    color: red;
+}
+
+.packages {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .package {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 250px;
+            transition: transform 0.3s;
+        }
+        .package:hover {
+            transform: scale(1.05);
+        }
+        .best-deal {
+            border: 2px solid gold;
+        }
+        .package h2 {
+            margin: 10px 0;
+        }
+        .price {
+            font-size: 24px;
+            color: green;
+            font-weight: bold;
+        }
+        .see-more-btn {
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div><a class="logo" href="index.html">Bright Mobile</a></div>
+        <nav>
+            <ul>
+                <li><a href="cart.html">CART</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="product-container">
+            <div class="product-image">
+                <img src="Assets/GP1.jpeg" alt="Google pixel 8 pro" class="active">
+                <img src="Assets/GP2.jpeg" alt="Google pixel 8 pro">
+                <img src="Assets/GP3.jpeg" alt="Google pixel 8 pro">
+                <button class="carousel-arrow left" onclick="prevImage()">&#10094;</button>
+                <button class="carousel-arrow right" onclick="nextImage()">&#10095;</button>
+            </div>
+            <div class="product-details">
+                <h1>Google pixel 8 pro</h1>
+                <div class="price-container">
+                    <div class="price" id="price">LKR 194,000.00</div>
+                    <div class="package-price" id="package-price">Package Price: LKR 0.00</div>
+                </div>
+
+                <div class="description">
+                    <H3>DISPLAY</H3>
+                    <p> <b>Type</b> LTPO OLED, 120Hz, HDR10+, 1600 nits (HBM), 2400 nits (peak) <br>
+                        <b>Size </b>6.7 inches, 108.7 cm2 (~87.4% screen-to-body ratio)<br>
+                        <b>Resolution</b>   1344 x 2992 pixels, 20:9 ratio (~489 ppi density)<br>
+                        <b>Protection</b>   Corning Gorilla Glass Victus 2<br>
+                             Always-on display</p>
+                    <H3>BODY</H3>
+                    <p>
+                        <b>Dimensions</b> 162.6 x 76.5 x 8.8 mm (6.40 x 3.01 x 0.35 in)<br>
+                        <b>Weight</b> 213 g (7.51 oz)<br>
+                        <b>Build</b> Glass front (Gorilla Glass Victus 2), glass back (Gorilla Glass Victus 2), aluminum frame<br>
+                        <b>SIM  </b> Nano-SIM + eSIM<br>
+                        IP68 dust tight and water resistant (immersible up to 1.5m for 30 min)<br>
+                    </p>
+
+                </div>
+                <div class="dropdown">
+                    <label for="color">Color:</label>S
+                    <select id="color" name="color">
+                        <option value="Obsidian Black">Obsidian Black</option>
+                        <option value="Hazel Gray">Hazel Gray</option>
+                        <option value="Rose Quartz">Rose Quartz</option>
+                    </select>
+
+                </div>
+                <div class="dropdown">
+                    <label for="capacity">Capacity:</label>
+                    <select id="capacity" name="capacity" onchange="updatePrice()">
+                        <option value="349900">128GB - LKR 194,000.00</option>
+                        <option value="399900">256GB - LKR 249,000.00</option>
+                        <option value="449900">512GB - LKR 259,000.00</option>
+
+                    </select>
+                </div>
+                <div class="total-price" id="total-price">
+                    Total Amount: LKR 194,000.00
+                </div>
+                <br>
+                <button class="buy-now" onclick="addToCart()">ADD TO CART</button>
+                <button class="buy-now">BUY NOW</button>
+            </div>
+        </div>
+        <div class="package-options">
+            <div class="package" onclick="selectPackage(500, 850, 300, 1650)">
+                <h3>Package 1</h3>
+                <p>Back Cover:<s>LKR 600</s> LKR 500</p>
+                <p>Charger:<s>LKR 1100</s> LKR 850</p>
+                <p>Tempered Glass:<s>LKR 420</s> LKR 300</p>
+                <p><strong>Total: LKR 1,650</strong></p>
+                <button class="see-more" onclick="openModal('Package 1','<b>Back Cover:<s>LKR 600</s> LKR 500 </B><br><br>Transparent, thin and soft, Unique design, Flexibility and reliable protection, Anti-slip protection', 'Assets/Bac1.jpeg', '<br><b>Charger:<s>LKR 1100</s> LKR 850</B> <br> <br> With a 15W power output, this charger delivers swift charging for your devices, ensuring that you spend less time waiting and more time enjoying your technology.', 'Assets/C1.jpeg','<br><b>Tempered Glass:<s>LKR 420</s> LKR 300</b> <br><br> Anti-fingerprint. Scratch resistant.Full screen coverage. Double strength edge. 9H Surface hardness. Smooth glass touch. This Ultra-thin 0.25mm tempered glass screen protector can maintain the original response sensitivity, bringing you a perfect touch experience.', 'Assets/B1.jpeg')">See More</button>
+            </div>
+
+            <div class="package" onclick="selectPackage(900, 1500, 600, 3000)">
+                <h3>Package 2</h3>
+                <p>Back Cover:<s>LKR 1,100</s> LKR 850</p>
+                <p>Charger:<s>LKR 1,650</s> LKR 1,450</p>
+                <p>Tempered Glass:<s>LKR 640</s> LKR 500</p>
+                <p><strong>Total:LKR 2,800</strong></p>
+                <button class="see-more" onclick="openModal('Package 2', '<p><b>Back Cover:<s>LKR 1,100</s> LKR 850<br></b><br> Eco-friendly, and Non-toxic<br> Scratch-proof and shockproof<br>Using environmentally friendly materials', 'Assets/Bac2.jpeg','<br><b>Charger:<s>LKR 1,650</s> LKR 1,450</b> <br><br> With a 20W power output <br>Universal Compatibility<br>Durable Build ', 'Assets/C2.jpeg', '<b>Tempered Glass:<s>LKR 640</s> LKR 500</b><br><br> Anti-fingerprint. “ bScratch resistant. Full screen coverage. Double.?8 jk strength edge. 9H Surface hardness. Smooth glass touch. Easy to install. The iPrivacy HD Anti-Peep Tempered Glass screen protector can be used for any public occasions as the 28 degree anti-spy angle, better anti-spy performance, keeps your personal private information hidden from strangers.', 'Assets/B2.jpeg')">See More</button>
+            </div>
+
+            <div class="package" onclick="selectPackage(1075, 1900, 850, 3825)">
+                <h3>Package 3</h3>
+                <p>Back Cover:<s>LKR 1,175</s> LKR 1,075</p>
+                <p>Charger:<s>LKR 2,120</s> LKR 1,900</p>
+                <p>Tempered Glass:<s>LKR 1,000</s> LKR 850</p>
+                <p><strong>Total: LKR 3,825</strong></p>
+                <button class="see-more" onclick="openModal('Package 3', '<b>Back Cover:<s>LKR 1,175</s> LKR 1,075</b> <br><br> Heavy Duty Drop Protection <br> You can hold your phone firming in your hand with our Border protection designed phone case.', 'Assets/Bac3.jpeg', '<b>Charger:<s>LKR 2,120</s> LKR 1,900</b> <br><br> 30W charger. PD Fast Charging USB-C Wall Charger – Power Delivery 3.0. Fast and convenient charging for your latest digital devices ', 'Assets/C3.jpeg', '<b>Tempered Glass:<s>LKR 1,000</s> LKR 850</b> <br><br> Anti-fingerprint<br>Scratch resistant<br>ESD Antistatic dustproof<br>9H Surface hardness', 'Assets/B3.jpeg')">See More</button>
+            </div>
+
+        </div>
+       
+
+        <h1 id="compare">Compare Our Packages</h1>
+    <div class="packages">
+        <div class="package">
+            <h2>Package 1 - Basic </h2>
+            <p class="price">LKR 1,650</p>
+            <p>✔ 15 W charger</p>
+            <p>✔ Normal backcover</p>
+
+        </div>
+        
+        <div class="package best-deal">
+            <h2>Package 2 - Premium </h2>
+            <p class="price">LKR 2,800</p>
+            <p>✔ 20 W charger</p>
+            <p>✔ 6 month Warranty & Support</p>
+            <p>✔ Camera protection backcover</p>
+        </div>
+        
+        <div class="package">
+            <h2>Package 3 - Deluxe </h2>
+            <p class="price">LKR 3,825</p>
+            <p>✔ 30 W charger</p>
+            <p>✔ 1 year Warranty & Support</p>
+            <p>✔ Backcover with Camera protection and Ring holder</p>
+        </div>
+    </div>
+
+
+
+    </main>
+
+    <!-- Modal for package details -->
+    <div id="packageModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle"></h2>
+            <div id="modalContent"></div>
+            <button class="close" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <!-- Zoom overlay for modal images -->
+    <div id="zoomOverlay" class="zoom-overlay">
+        <span class="close-zoom" onclick="closeZoom()">&times;</span>
+        <img id="zoomedImage" src="" alt="Zoomed Image">
+    </div>
+
+    <footer>
+        <p>© 2025 All rights reserved by Bright Mobile</p>
+    </footer>
+
+
+
+
+
+    <script>
+        let currentImageIndex = 0;
+const images = document.querySelectorAll('.product-image img');
+let selectedPackagePrice = 0;
+
+function openModal(title, details) {
+            alert(title + " - " + details);
+        }
+
+function showImage(index) {
+    images.forEach((img, i) => {
+        img.classList.toggle('active', i === index);
+    });
+}
+
+function nextImage() {
+    currentImageIndex = (currentImageIndex + 1) % images.length;
+    showImage(currentImageIndex);
+}
+
+function prevImage() {
+    currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+    showImage(currentImageIndex);
+}
+
+function updatePrice() {
+    const capacitySelect = document.getElementById('capacity');
+    const priceElement = document.getElementById('price');
+    const selectedPrice = capacitySelect.value;
+
+    // Update mobile price display
+    priceElement.textContent = `LKR ${parseFloat(selectedPrice).toLocaleString()}.00`;
+
+    // Update total price
+    updateTotalPrice();
+}
+
+function selectPackage(backCover, charger, temperedGlass, total) {
+    // Convert total to a number
+    selectedPackagePrice = parseFloat(total);
+    updateTotalPrice();
+
+    // Highlight selected package
+    const packages = document.querySelectorAll('.package-options .package');
+    packages.forEach(pkg => pkg.classList.remove('selected'));
+    event.currentTarget.classList.add('selected');
+}
+
+function updateTotalPrice() {
+    const priceElement = document.getElementById('price');
+    const packagePriceElement = document.getElementById('package-price');
+    const totalPriceElement = document.getElementById('total-price');
+
+    // Extract numeric price of the mobile (remove "LKR", commas, and decimals)
+    const mobilePrice = parseFloat(priceElement.textContent.replace(/[^0-9.]/g, ''));
+
+    // Ensure selectedPackagePrice is a number
+    const packagePrice = parseFloat(selectedPackagePrice);
+
+    // Calculate total price
+    const totalPrice = mobilePrice + packagePrice;
+
+    // Update package price display
+    packagePriceElement.textContent = `Package Price: LKR ${packagePrice.toLocaleString()}.00`;
+
+    // Update total price display
+    totalPriceElement.textContent = `Total Amount: LKR ${totalPrice.toLocaleString()}.00`;
+}
+
+function addToCart() {
+    // Get selected values
+    const color = document.getElementById('color').value;
+    const capacity = document.getElementById('capacity').value;
+    const price = document.getElementById('price').textContent;
+    const totalPrice = document.getElementById('total-price').textContent;
+    const image = document.querySelector('.product-image img.active').src;
+
+    // Create cart item object
+    const cartItem = {
+        name: 'Pixel 8 Pro',
+        color: color,
+        capacity: capacity,
+        price: price,
+        packagePrice: selectedPackagePrice,
+        totalPrice: totalPrice,
+        image: image
+    };
+
+    // Retrieve existing cart items or initialize an empty array
+    let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+    // Add new item to the cart
+    cartItems.push(cartItem);
+
+    // Save updated cart items to localStorage
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+
+    // Redirect to cart.html
+    window.location.href = 'cart.html';
+}
+
+function closeModal() {
+    document.getElementById('packageModal').style.display = 'none';
+}
+
+showImage(currentImageIndex);
+    
+        function openZoom(imageSrc) {
+            const zoomOverlay = document.getElementById('zoomOverlay');
+            const zoomedImage = document.getElementById('zoomedImage');
+            zoomedImage.src = imageSrc;
+            zoomOverlay.style.display = 'flex';
+        }
+    
+        function closeZoom() {
+            const zoomOverlay = document.getElementById('zoomOverlay');
+            zoomOverlay.style.display = 'none';
+        }
+    
+        function openModal(title, backCoverText, backCoverImg, chargerText, chargerImg, temperedGlassText, temperedGlassImg) {
+            document.getElementById('modalTitle').innerHTML = title;
+            document.getElementById('modalContent').innerHTML = `
+                <div class="item">
+                    <img src="${backCoverImg}" alt="Back Cover" onclick="openZoom('${backCoverImg}')">
+                    <p>${backCoverText}</p>
+                </div>
+                <div class="item">
+                    <img src="${chargerImg}" alt="Charger" onclick="openZoom('${chargerImg}')">
+                    <p>${chargerText}</p>
+                </div>
+                <div class="item">
+                    <img src="${temperedGlassImg}" alt="Tempered Glass" onclick="openZoom('${temperedGlassImg}')">
+                    <p>${temperedGlassText}</p>
+                </div>
+            `;
+            document.getElementById('packageModal').style.display = 'flex';
+        }
+    
+        // Close modal if clicked outside the modal content
+        window.onclick = function(event) {
+            const modal = document.getElementById('packageModal');
+            const zoomOverlay = document.getElementById('zoomOverlay');
+            if (event.target === modal) {
+                closeModal();
+            }
+            if (event.target === zoomOverlay) {
+                closeZoom();
+            }
+        };
+    
+        showImage(currentImageIndex);
+    </script>
+</body>
+</html>
