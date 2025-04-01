@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Bright Mobile</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to CSS -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+        .checkout-progress {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            background-color: white;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .checkout-progress .step {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+        }
+        .checkout-progress .step.active {
+            font-weight: bold;
+            color: #007bff;
+        }
+        .checkout-progress .step::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: #ddd;
+            top: 50%;
+            left: 50%;
+            z-index: -1;
+        }
+        .checkout-progress .step:last-child::after {
+            display: none;
+        }
+        .checkout-container {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            background-color: white;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .checkout-container .left-column {
+            flex: 2;
+        }
+        .checkout-container .right-column {
+            flex: 1;
+        }
+        .cart-summary {
+            margin-bottom: 20px;
+        }
+        .cart-summary .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .cart-summary .cart-item img {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+        .cart-summary .cart-item-details {
+            flex: 1;
+        }
+        .cart-summary .cart-item-details h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+        .cart-summary .cart-item-details p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        .billing-details {
+            margin-bottom: 20px;
+        }
+        .billing-details h2 {
+            margin-bottom: 15px;
+        }
+        .billing-details .form-group {
+            margin-bottom: 15px;
+        }
+        .billing-details .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .billing-details .form-group input,
+        .billing-details .form-group select,
+        .billing-details .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .billing-details .form-group textarea {
+            resize: vertical;
+        }
+        .payment-methods {
+            margin-bottom: 20px;
+        }
+        .payment-methods h2 {
+            margin-bottom: 15px;
+        }
+        .payment-methods .payment-option {
+            margin-bottom: 10px;
+        }
+        .payment-methods .payment-option label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .order-summary {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .order-summary h2 {
+            margin-bottom: 15px;
+        }
+        .order-summary .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .order-summary .summary-item.total {
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .place-order-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .place-order-btn:hover {
+            background-color: #0056b3;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div><a class="logo" href="index.html">Bright Mobile</a></div>
+    </header>
+
+    <main>
+        <div class="checkout-progress">
+            <div class="step active">Cart</div>
+            <div class="step">Billing Details</div>
+            <div class="step">Payment</div>
+            <div class="step">Review</div>
+        </div>
+
+        <div class="checkout-container">
+            <div class="left-column">
+                <!-- Billing Details Section -->
+                <div class="billing-details">
+                    <h2>Billing Details</h2>
+                    <form>
+                        <div class="form-group">
+                            <label for="firstName">First name *</label>
+                            <input type="text" id="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last name *</label>
+                            <input type="text" id="lastName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Country / Region *</label>
+                            <select id="country" required>
+                                <option value="Sri Lanka">Sri Lanka</option>
+                                <!-- Add more countries as needed -->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="streetAddress">Street address *</label>
+                            <input type="text" id="streetAddress" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="apartment">Apartment, suite, unit, etc. (optional)</label>
+                            <input type="text" id="apartment">
+                        </div>
+                        <div class="form-group">
+                            <label for="city">Town / City *</label>
+                            <input type="text" id="city" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="postcode">Postcode / ZIP *</label>
+                            <input type="text" id="postcode" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone (optional)</label>
+                            <input type="tel" id="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email address *</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox"> Create an account?
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox"> Ship to a different address?
+                            </label>
+                        </div>
+                        <div class="form-group">
+                            <label for="orderNotes">Order notes (optional)</label>
+                            <textarea id="orderNotes" rows="4" placeholder="Notes about your order, e.g. special notes for delivery."></textarea>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Payment Methods Section -->
+                <div class="payment-methods">
+                    <h2>Payment Methods</h2>
+                    <div class="payment-option">
+                        <label>
+                            <input type="radio" name="payment" checked> Direct bank transfer
+                        </label>
+                        <p>Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.</p>
+                    </div>
+                    <div class="payment-option">
+                        <label>
+                            <input type="radio" name="payment"> Amex Payment Gateway
+                        </label>
+                    </div>
+                    <div class="payment-option">
+                        <label>
+                            <input type="radio" name="payment"> Visa/Master
+                        </label>
+                    </div>
+                    <!-- Add more payment options as needed -->
+                </div>
+            </div>
+
+            <div class="right-column">
+                <!-- Order Summary Section -->
+                <div class="order-summary">
+                    <h2>Order Summary</h2>
+                    <div id="cart-items-summary">
+                        <!-- Cart items will be dynamically inserted here -->
+                    </div>
+                    <div class="summary-item total">
+                        <span>Total:</span>
+                        <span id="total-amount">Rs.0.00</span>
+                    </div>
+                </div>
+
+                <!-- Place Order Button -->
+                <button class="place-order-btn" onclick="placeOrder()">Place Order</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2025 All rights reserved by Bright Mobile</p>
+    </footer>
+
+    <script>
+        // Retrieve cart items from localStorage
+        let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+
+        // Display cart items in the checkout page
+        const cartItemsSummary = document.getElementById('cart-items-summary');
+        const totalAmount = document.getElementById('total-amount');
+
+        function renderCartSummary() {
+            if (cartItems.length > 0) {
+                let total = 0;
+                cartItemsSummary.innerHTML = cartItems.map(item => `
+                    <div class="summary-item">
+                        <span>${item.name} (${item.color})</span>
+                        <span>${item.price}</span>
+                    </div>
+                `).join('');
+
+                // Calculate total amount
+                total = cartItems.reduce((sum, item) => sum + parseFloat(item.price.replace('Rs.', '')), 0);
+                totalAmount.textContent = `Rs.${total.toFixed(2)}`;
+            } else {
+                cartItemsSummary.innerHTML = `<p>Your cart is empty.</p>`;
+                totalAmount.textContent = 'Rs.0.00';
+            }
+        }
+
+        // Function to handle placing the order
+        function placeOrder() {
+            if (cartItems.length === 0) {
+                alert('Your cart is empty. Please add items to your cart before placing an order.');
+                return;
+            }
+            alert('Order placed successfully!');
+            localStorage.removeItem('cartItems'); // Clear the cart after placing the order
+            window.location.href = 'index.html'; // Redirect to the home page
+        }
+
+        // Initial render
+        renderCartSummary();
+    </script>
+</body>
+</html>
