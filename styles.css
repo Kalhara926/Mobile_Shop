@@ -1,0 +1,445 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content:center;
+    flex-wrap: wrap;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    text-align: left;
+
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    text-align: left;
+    overflow: hidden;
+}
+
+.hero-banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.hero-text {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+    text-align: center;
+}
+
+.hero-text h2 {
+    font-size: 2.5rem;
+    margin: 10px 0;
+}
+
+.hero-text p {
+    font-size: 1.5rem;
+    margin: 10px 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    margin-top: 20px;
+}
+
+/* Categories Section */
+.categories {
+    padding: 20px;
+    text-align: center;
+    overflow-x: auto; /* Enable horizontal scrolling for smaller screens */
+}
+
+.categories h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.category-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap; /* Prevent wrapping */
+    gap: 15px; /* Add spacing between items */
+    padding-bottom: 10px; /* Add padding for scrollbar */
+}
+
+.category-item {
+    text-align: center;
+    min-width: 150px; /* Minimum width for each category item */
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+.category-item img {
+    width: 100%;
+    height: 200px; /* Fixed height for all category images */
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.category-item p {
+    margin: 10px 0;
+    font-size: 1.2rem;
+}
+
+/* Smartphones Section */
+.smartphones {
+    padding: 20px;
+    text-align: center;
+}
+
+.smartphones h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.smartphone-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.smartphone-item {
+    margin: 15px;
+    text-align: center;
+    width: 22%;
+}
+
+.smartphone-item img {
+    width: 100%;
+    height: 300px; /* Fixed height for all smartphone images */
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.smartphone-item h3 {
+    margin: 10px 0;
+    font-size: 1.2rem;
+}
+
+.smartphone-item p {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Latest Arrivals Section */
+.latest-arrivals {
+    padding: 20px;
+    text-align: center;
+}
+
+.latest-arrivals h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.view-all {
+    display: inline-block;
+    margin: 20px 0;
+    text-decoration: none;
+    color: #007bff;
+    font-size: 1.2rem;
+}
+
+.hot-picks {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.hot-pick-item {
+    margin: 15px;
+    text-align: center;
+    width: 22%;
+}
+
+.hot-pick-item img {
+    width: 100%;
+    height: 300px; /* Fixed height for all hot-pick images */
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.hot-pick-item h3 {
+    margin: 10px 0;
+    font-size: 1.2rem;
+}
+
+.hot-pick-item p {
+    margin: 5px 0;
+    font-size: 1rem;
+    color: #666;
+}
+
+/* PlayStation Section */
+.playstation {
+    padding: 20px;
+    text-align: center;
+    overflow-x: auto; /* Enable horizontal scrolling for smaller screens */
+}
+
+.playstation h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.playstation-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap; /* Prevent wrapping */
+    gap: 15px; /* Add spacing between items */
+    padding-bottom: 10px; /* Add padding for scrollbar */
+}
+
+.playstation-item {
+    text-align: center;
+    min-width: 200px; /* Minimum width for each PlayStation item */
+    flex-shrink: 0; /* Prevent shrinking */
+}
+
+.playstation-item img {
+    width: 100%;
+    height: 200px; /* Fixed height for all PlayStation images */
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* Titan Black Section */
+.titan-black {
+    padding: 20px;
+    text-align: center;
+    background-color: #f8f9fa;
+}
+
+.titan-black-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.titan-black-text {
+    text-align: left;
+    width: 40%;
+}
+
+.titan-black-text h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.titan-black-text p {
+    font-size: 1.2rem;
+    color: #666;
+}
+
+.titan-black-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    width: 55%;
+}
+
+.titan-black-item {
+    text-align: center;
+}
+
+.titan-black-item img {
+    width: 100%;
+    height: 150px; /* Fixed height for Titan Black images */
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.titan-black-item h3 {
+    margin: 10px 0;
+    font-size: 1.2rem;
+}
+
+/* FAQ Section */
+.faq {
+    padding: 20px;
+    text-align: center;
+}
+
+.faq h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.faq p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.faq ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.faq ul li {
+    margin: 10px 0;
+    font-size: 1rem;
+}
+
+/* Newsletter Section */
+.newsletter {
+    padding: 20px;
+    text-align: center;
+    background-color: #f8f9fa;
+}
+
+.newsletter h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.newsletter p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.newsletter form {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.newsletter input {
+    padding: 10px;
+    width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.newsletter button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+/* Footer Section */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+footer .footer-content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+footer .footer-links {
+    margin: 15px;
+}
+
+footer .footer-links h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+footer .footer-links ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+footer .footer-links ul li {
+    margin: 10px 0;
+}
+
+footer .footer-links ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1rem;
+}
+
+footer p {
+    margin: 20px 0 0;
+    font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-text h2 {
+        font-size: 2rem;
+    }
+
+    .hero-text p {
+        font-size: 1.2rem;
+    }
+
+    .category-grid, .smartphone-grid, .hot-picks {
+        flex-direction: column;
+    }
+
+    .footer-content {
+        flex-direction: column;
+    }
+
+    .hero-content, .category-item, .smartphone-item, .hot-pick-item {
+        width: 100%;
+    }
+
+    .titan-black-content {
+        flex-direction: column;
+    }
+
+    .titan-black-text {
+        width: 100%;
+        text-align: center;
+    }
+
+    .titan-black-grid {
+        width: 100%;
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
