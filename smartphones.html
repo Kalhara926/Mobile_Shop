@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smartphones - Bright Mobile</title>
+    <link rel="stylesheet" href="styles1.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .product-item {
+            display: none; /* Initially hide all products */
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="header-content">
+            <h1>Bright Mobile</h1>
+            <nav>
+                <ul>
+                    <li><a href="new-arrivals.html">New Arrivals</a></li>
+                    <li><a href="smartphones.html">Smartphones</a></li>
+                    <li><a href="imac-macbook.html">Mac & MacBook</a></li>
+                    <li><a href="audio-accessories.html">Audio</a></li>
+                    <li><a href="Accessories.html">Accessories</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb Section -->
+    <section class="breadcrumb">
+        <p><a href="index.html">Home</a>/ Smartphones</p>
+    </section>
+
+    <!-- Filters Section -->
+    <section class="filters">
+        <div class="filter-group">
+            <h3>Stock Status</h3>
+            <label><input type="checkbox" name="stock" value="in-stock"> In Stock</label>
+            <label><input type="checkbox" name="stock" value="out-of-stock"> Out of Stock</label>
+        </div>
+        <div class="filter-group">
+            <h3>Product Categories</h3>
+            <label><input type="checkbox" name="category" value="smartphones"> Smartphones</label>
+            <label><input type="checkbox" name="category" value="tablets"> Tablets</label>
+        </div>
+    </section>
+
+    <!-- Product Listings Section -->
+    <section class="product-list">
+        <div class="product-header">
+            <h2>Smartphones</h2>
+            <p>Showing 1-12 of 18 results</p>
+        </div>
+        <div class="product-grid">
+            <!-- Example Products with Data Attributes -->
+            <div class="product-item" data-stock="in-stock" data-category="smartphones">
+                <a href="product1.html">
+                    <img src="Assets/iPhone-16-Pro-Black-1.jpg" alt="Infinix Hot 40i 8GB RAM 128GB">
+                </a>
+                <h3>iPhone 15 Pro</h3>
+                <p>Rs.349,900.00 - Rs.489,900.00</p>
+            </div>
+
+            <div class="product-item" data-stock="out-of-stock" data-category="smartphones">
+                <a href="product2.html">
+                <img src="Assets/Untitled-design-6.png" alt="HMD Crest 5G – 6GB+128GB">
+            </a>
+                <h3>Google pixel 8 pro</h3>
+                <p>Rs.194,000.00 - Rs.259,000.00</p>
+            </div>
+
+            <div class="product-item" data-stock="in-stock" data-category="tablets">
+                <img src="Assets/Samsung-Galaxy-Tab-S10-Plus-12GB-RAM-256GB.webp" alt="Samsung Tablet S6">
+                <h3>Samsung Galaxy Tab S10 Plus</h3>
+                <p>Rs.322,000.00 - Rs.382,000.00</p>
+            </div>
+
+            <div class="product-item" data-stock="out-of-stock" data-category="tablets">
+                <img src="Assets/Apple-iPad-Pro-M4-Chip-11-Inch-256GB-WiFi-Only-2024.jpg" alt="iPad Pro 2023">
+                <h3>Apple iPad Pro M4 Chip 11 Inch 256GB WiFi Only</h3>
+                <p>Rs.349,000.00 - 399,000.00</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="new-arrivals.html">New Arrivals</a></li>
+                    <li><a href="smartphones.html">Smartphones</a></li>
+                    <li><a href="imac-macbook.html">Misc & MacBook</a></li>
+                    <li><a href="audio-accessories.html">Audio</a></li>
+                    <li><a href="Accessories.html">Accessories</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>About</h3>
+                <ul>
+                    <li><a href="#">Story</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h3>Policies</h3>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+        </div>
+        <p>© 2025 All rights reserved by Bright Mobile</p>
+    </footer>
+
+    <!-- JavaScript for Filters -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const products = document.querySelectorAll(".product-item");
+
+            function filterProducts() {
+                let selectedStock = Array.from(document.querySelectorAll('input[name="stock"]:checked'))
+                                        .map(cb => cb.value);
+                let selectedCategories = Array.from(document.querySelectorAll('input[name="category"]:checked'))
+                                             .map(cb => cb.value);
+
+                products.forEach(product => {
+                    let productStock = product.getAttribute("data-stock");
+                    let productCategory = product.getAttribute("data-category");
+
+                    let stockMatch = selectedStock.length === 0 || selectedStock.includes(productStock);
+                    let categoryMatch = selectedCategories.length === 0 || selectedCategories.includes(productCategory);
+
+                    if (stockMatch && categoryMatch) {
+                        product.style.display = "block";
+                    } else {
+                        product.style.display = "none";
+                    }
+                });
+            }
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener("change", filterProducts);
+            });
+
+            filterProducts(); // Initial call to display all products
+        });
+    </script>
+
+</body>
+</html>
